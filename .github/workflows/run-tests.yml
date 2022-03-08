@@ -9,14 +9,12 @@ jobs:
             fail-fast: true
             matrix:
                 os: [ubuntu-latest]
-                php: [8.1 8.0]
-                laravel: [9.*, 8.*]
+                php: [8.1, 8.0]
+                laravel: [9.*]
                 stability: [prefer-lowest, prefer-stable]
                 include:
                     -   laravel: 9.*
                         testbench: 7.*
-                    -   laravel: 8.*
-                        testbench: 6.23
 
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -42,4 +40,4 @@ jobs:
                     composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
             -   name: Execute tests
-                run: vendor/bin/phpunit
+                run: vendor/bin/pest
