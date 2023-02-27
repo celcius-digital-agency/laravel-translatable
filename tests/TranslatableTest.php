@@ -510,7 +510,7 @@ it('can translate a field based on the translations of another one', function ()
     $testModel = (new class () extends TestModel {
         public function setOtherFieldAttribute($value, $locale = 'en')
         {
-            $this->attributes['other_field'] = $value.' '.$this->getTranslation('name', $locale);
+            $this->attributes['other_field'] = $value . ' ' . $this->getTranslation('name', $locale);
         }
     });
 
@@ -710,4 +710,39 @@ it('will return default fallback locale translation when getting an unknown loca
     $this->testModel->save();
 
     expect($this->testModel->getTranslation('name', 'fr'))->toBe('testValue_en');
+});
+
+it('will return all locales when getting all translations', function () {
+    $this->testModel->setTranslation('name', 'en', 'testValue_en');
+    $this->testModel->setTranslation('name', 'fr', 'testValue_fr');
+    $this->testModel->setTranslation('name', 'tr', 'testValue_tr');
+    $this->testModel->save();
+
+    expect($this->testModel->locales())->toEqual([
+        'en',
+        'fr',
+        'tr',
+    ]);
+});
+
+it('queries the database whether a locale exists', function () {
+    $this->testModel->setTranslation('name', 'en', 'testValue_en');
+    $this->testModel->setTranslation('name', 'fr', 'testValue_fr');
+    $this->testModel->setTranslation('name', 'tr', 'testValue_tr');
+    $this->testModel->save();
+
+    expect($this->testModel->whereLocale('name', 'en')->get())->toHaveCount(1);
+
+    expect($this->testModel->whereLocale('name', 'de')->get())->toHaveCount(0);
+});
+
+it('queries the database for multiple locales', function () {
+    $this->testModel->setTranslation('name', 'en', 'testValue_en');
+    $this->testModel->setTranslation('name', 'fr', 'testValue_fr');
+    $this->testModel->setTranslation('name', 'tr', 'testValue_tr');
+    $this->testModel->save();
+
+    expect($this->testModel->whereLocales('name', ['en', 'tr'])->get())->toHaveCount(1);
+
+    expect($this->testModel->whereLocales('name', ['de', 'be'])->get())->toHaveCount(0);
 });
