@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Translatable\Exceptions\AttributeIsNotTranslatable;
 use Spatie\Translatable\Facades\Translatable;
 use Spatie\Translatable\Test\TestSupport\TestModel;
+use Spatie\Translatable\Test\TestSupport\TestModelWithFallbackLocale;
+use Spatie\Translatable\Test\TestSupport\TestModelWithoutFallback;
 
 beforeEach(function () {
     $this->testModel = new TestModel();
@@ -394,6 +397,25 @@ it('can use accessors on translated attributes', function () {
     expect('I just accessed testValue_en')->toEqual($testModel->name);
 });
 
+it('can be converted to array when using accessors on translated attributes', function () {
+    $testModel = new class () extends TestModel {
+        public function getNameAttribute($value)
+        {
+            return "I just accessed {$value}";
+        }
+    };
+
+    $testModel->setTranslation('name', 'en', 'testValue_en');
+    $testModel->setTranslation('name', 'nl', 'testValue_nl');
+
+    expect($testModel->toArray())
+        ->toHaveKey('name')
+        ->toContain([
+            'en' => 'I just accessed testValue_en',
+            'nl' => 'I just accessed testValue_nl',
+        ]);
+});
+
 it('can use mutators on translated attributes', function () {
     $testModel = new class () extends TestModel {
         public function setNameAttribute($value)
@@ -746,3 +768,40 @@ it('queries the database for multiple locales', function () {
 
     expect($this->testModel->whereLocales('name', ['de', 'be'])->get())->toHaveCount(0);
 });
+
+it('can disable attribute locale fallback on a per model basis', function () {
+    config()->set('app.fallback_locale', 'en');
+
+    $model = new TestModelWithoutFallback();
+
+    $model->setTranslation('name', 'en', 'testValue_en');
+    $model->save();
+
+    $model->setLocale('fr');
+
+    expect($model->name)->toBe('');
+});
+
+it('can set fallback locale on model', function () {
+    config()->set('app.fallback_locale', 'en');
+
+    $model = new TestModelWithFallbackLocale();
+
+    TestModelWithFallbackLocale::$fallbackLocale = 'fr';
+
+    $model->setTranslation('name', 'fr', 'testValue_fr');
+    $model->setTranslation('name', 'en', 'testValue_en');
+    $model->save();
+
+    $model->setLocale('nl');
+
+    expect($model->name)->toBe('testValue_fr');
+});
+
+it('translations macro meets expectations', function (mixed $expected, string|array $locales, mixed $value) {
+    expect(Factory::translations($locales, $value))->toEqual($expected);
+})->with([
+    [['en' => 'english'], 'en', 'english'],
+    [['en' => 'english', 'nl' => 'english'], ['en', 'nl'], 'english'],
+    [['en' => 'english', 'nl' => 'dutch'], ['en', 'nl'], ['english', 'dutch']],
+]);

@@ -2,6 +2,130 @@
 
 All notable changes to `laravel-translatable` will be documented in this file
 
+## 6.6.2 - 2024-03-01
+
+### What's Changed
+
+* Fix toArray when using accessors on translatable attributes by @vencelkatai in https://github.com/spatie/laravel-translatable/pull/437
+
+### New Contributors
+
+* @vencelkatai made their first contribution in https://github.com/spatie/laravel-translatable/pull/437
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.6.1...6.6.2
+
+## 6.6.1 - 2024-02-26
+
+### What's Changed
+
+* fix: allow raw searchable umlauts by @Muetze42 in https://github.com/spatie/laravel-translatable/pull/436
+
+### New Contributors
+
+* @Muetze42 made their first contribution in https://github.com/spatie/laravel-translatable/pull/436
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.6.0...6.6.1
+
+## 6.6.0 - 2024-02-23
+
+### What's Changed
+
+* Add laravel 11 support by @mokhosh in https://github.com/spatie/laravel-translatable/pull/434
+
+### New Contributors
+
+* @mokhosh made their first contribution in https://github.com/spatie/laravel-translatable/pull/434
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.5.5...6.6.0
+
+## 6.5.5 - 2023-12-06
+
+### What's Changed
+
+* Revert "Keep null value" by @mabdullahsari in https://github.com/spatie/laravel-translatable/pull/428
+
+### New Contributors
+
+* @mabdullahsari made their first contribution in https://github.com/spatie/laravel-translatable/pull/428
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.5.4...6.5.5
+
+## 6.5.4 - 2023-12-01
+
+### What's Changed
+
+* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/spatie/laravel-translatable/pull/413
+* Keep the number of translations even with null values by @sdebacker in https://github.com/spatie/laravel-translatable/pull/427
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/spatie/laravel-translatable/pull/418
+
+### New Contributors
+
+* @sdebacker made their first contribution in https://github.com/spatie/laravel-translatable/pull/427
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.5.3...6.5.4
+
+## 6.5.3 - 2023-07-19
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/spatie/laravel-translatable/pull/398
+- handle new attribute mutator :boom: by @messi89 in https://github.com/spatie/laravel-translatable/pull/402
+
+### New Contributors
+
+- @messi89 made their first contribution in https://github.com/spatie/laravel-translatable/pull/402
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.5.2...6.5.3
+
+## 6.5.2 - 2023-06-20
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.4.0 to 1.5.1 by @dependabot in https://github.com/spatie/laravel-translatable/pull/394
+- Convert static methods to scopes by @gdebrauwer in https://github.com/spatie/laravel-translatable/pull/396
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.5.1...6.5.2
+
+## 6.5.1 - 2023-05-06
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.3.6 to 1.4.0 by @dependabot in https://github.com/spatie/laravel-translatable/pull/389
+- Add getFallbackLocale method by @gdebrauwer in https://github.com/spatie/laravel-translatable/pull/391
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.5.0...6.5.1
+
+## 6.5.0 - 2023-04-20
+
+### What's Changed
+
+- update customize-the-toarray-method.md by @moham96 in https://github.com/spatie/laravel-translatable/pull/387
+- Add macro for `$this->translations()` in factories by @bram-pkg in https://github.com/spatie/laravel-translatable/pull/382
+
+### New Contributors
+
+- @moham96 made their first contribution in https://github.com/spatie/laravel-translatable/pull/387
+- @bram-pkg made their first contribution in https://github.com/spatie/laravel-translatable/pull/382
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.4.0...6.5.0
+
+## 6.4.0 - 2023-03-19
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.3.5 to 1.3.6 by @dependabot in https://github.com/spatie/laravel-translatable/pull/376
+- Fix badge with `tests` status in `README.md` by @gomzyakov in https://github.com/spatie/laravel-translatable/pull/377
+- Update README.md by @alirezasalehizadeh in https://github.com/spatie/laravel-translatable/pull/381
+- Enable fallback locale on a per model basis by @yoeriboven in https://github.com/spatie/laravel-translatable/pull/380
+
+### New Contributors
+
+- @gomzyakov made their first contribution in https://github.com/spatie/laravel-translatable/pull/377
+- @alirezasalehizadeh made their first contribution in https://github.com/spatie/laravel-translatable/pull/381
+- @yoeriboven made their first contribution in https://github.com/spatie/laravel-translatable/pull/380
+
+**Full Changelog**: https://github.com/spatie/laravel-translatable/compare/6.3.0...6.4.0
+
 ## 6.3.0 - 2023-01-14
 
 ### What's Changed
