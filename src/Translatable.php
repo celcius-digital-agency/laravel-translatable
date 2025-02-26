@@ -19,6 +19,10 @@ class Translatable
 
     public ?Closure $missingKeyCallback = null;
 
+    public bool $allowNullForTranslation = false;
+
+    public bool $allowEmptyStringForTranslation = false;
+
     public function fallback(
         ?string $fallbackLocale = null,
         ?bool $fallbackAny = false,
@@ -27,6 +31,20 @@ class Translatable
         $this->fallbackLocale = $fallbackLocale;
         $this->fallbackAny = $fallbackAny;
         $this->missingKeyCallback = $missingKeyCallback;
+
+        return $this;
+    }
+
+    public function allowNullForTranslation(bool $allowNullForTranslation = true): self
+    {
+        $this->allowNullForTranslation = $allowNullForTranslation;
+
+        return $this;
+    }
+
+    public function allowEmptyStringForTranslation(bool $allowEmptyStringForTranslation = true): self
+    {
+        $this->allowEmptyStringForTranslation = $allowEmptyStringForTranslation;
 
         return $this;
     }
